@@ -393,7 +393,9 @@ func locateBinaries(p *profile.Profile, s *source, obj plugin.ObjTool, ui plugin
 	searchPath := os.Getenv("PPROF_BINARY_PATH")
 	if searchPath == "" {
 		// Use $HOME/pprof/binaries as default directory for local symbolization binaries
-		searchPath = filepath.Join(os.Getenv(homeEnv()), "pprof", "binaries")
+		// billming, this doesn't make much sense. Put cwd into the list is better.
+		//searchPath = filepath.Join(os.Getenv(homeEnv()), "pprof", "binaries")
+		searchPath, _ = os.Getwd()
 	}
 mapping:
 	for _, m := range p.Mapping {
